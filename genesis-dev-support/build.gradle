@@ -1,0 +1,27 @@
+plugins {
+	id 'java-gradle-plugin'
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url('https://plugins.gradle.org/m2/')
+	}
+}
+
+dependencies {
+	implementation 'org.domaframework.doma:codegen:3.2.1'
+	testImplementation(platform('org.junit:junit-bom:5.12.1'))
+	testImplementation('org.junit.jupiter:junit-jupiter')
+	testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+}
+
+test {
+	useJUnitPlatform()
+}
