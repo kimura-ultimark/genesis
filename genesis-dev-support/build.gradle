@@ -1,11 +1,37 @@
 plugins {
-	id 'java-gradle-plugin'
+	id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+}
+
+group = 'jp.co.ultimark.genesis'
+version = '1.0.0'
+
+gradlePlugin {
+	
+	website = 'https://github.com/kimura-ultimark/genesis'
+	vcsUrl = 'https://github.com/kimura-ultimark/genesis'
+
+	plugins {
+		// Genesis CodeGen
+		genesisCodeGen {
+			id = 'jp.co.ultimark.genesis.gradle.plugin.codegen'
+			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.codegen.GenesisCodegenPlugin'
+		}
+		// Genesis Mockup
+		genesisMockup {
+			id = 'jp.co.ultimark.genesis.gradle.plugin.mockup'
+			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.mockup.GenesisMockupPlugin'
+		}
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
 }
 
 repositories {
