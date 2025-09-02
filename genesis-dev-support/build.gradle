@@ -20,11 +20,17 @@ gradlePlugin {
 		// Genesis CodeGen
 		genesisCodeGen {
 			id = 'jp.co.ultimark.genesis.gradle.plugin.codegen'
+			displayName = 'Genesis CodeGen Plugin'
+			description = 'Code generation plugin based on Doma CodeGen plugin.'
+			tags.set([ 'ultimark' ])
 			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.codegen.GenesisCodegenPlugin'
 		}
 		// Genesis Mockup
 		genesisMockup {
 			id = 'jp.co.ultimark.genesis.gradle.plugin.mockup'
+			displayName = 'Genesis Mockup Plugin'
+			description = 'Original mockup plugin. Any htmls and other static resources can be deployed to Spring Boot managed resources.'
+			tags.set([ 'ultimark' ])
 			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.mockup.GenesisMockupPlugin'
 		}
 	}
@@ -33,6 +39,11 @@ gradlePlugin {
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
+
+tasks.withType(Javadoc) {
+	options.encoding = 'UTF-8'
+}
+
 
 repositories {
 	mavenCentral()
