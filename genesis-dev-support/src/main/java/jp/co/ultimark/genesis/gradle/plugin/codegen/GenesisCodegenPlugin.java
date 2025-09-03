@@ -3,7 +3,6 @@ package jp.co.ultimark.genesis.gradle.plugin.codegen;
 import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.Project;
 import org.seasar.doma.gradle.codegen.CodeGenPlugin;
-import org.seasar.doma.gradle.codegen.GlobalFactory;
 import org.seasar.doma.gradle.codegen.extension.CodeGenConfig;
 
 /**
@@ -21,7 +20,7 @@ public class GenesisCodegenPlugin extends CodeGenPlugin {
 			@SuppressWarnings("unchecked")
 			final NamedDomainObjectContainer<CodeGenConfig> container = (NamedDomainObjectContainer<CodeGenConfig>)config;
 			container.all(codeGenConfig -> {
-				codeGenConfig.setGlobalFactory(new GlobalFactory());
+				codeGenConfig.setGlobalFactory(new ConventionalGlobalFactory());
 			});
 		});
 	}
