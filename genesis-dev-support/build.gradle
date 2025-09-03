@@ -1,5 +1,6 @@
 plugins {
-	id 'com.gradle.plugin-publish' version '1.2.1'
+	id 'java-gradle-plugin'
+	id 'maven-publish'
 }
 
 java {
@@ -26,12 +27,37 @@ gradlePlugin {
 			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.codegen.GenesisCodegenPlugin'
 		}
 		// Genesis Mockup
-		genesisMockup {
-			id = 'jp.co.ultimark.genesis.gradle.plugin.mockup'
-			displayName = 'Genesis Mockup Plugin'
-			description = 'Original mockup plugin. Any htmls and other static resources can be deployed to Spring Boot managed resources.'
-			tags.set([ 'ultimark' ])
-			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.mockup.GenesisMockupPlugin'
+  		genesisMockup {
+  			id = 'jp.co.ultimark.genesis.gradle.plugin.mockup'
+  			displayName = 'Genesis Mockup Plugin'
+  			description = 'Original mockup plugin. Any htmls and other static resources can be deployed to Spring Boot managed resources.'
+  			tags.set([ 'ultimark' ])
+  			implementationClass = 'jp.co.ultimark.genesis.gradle.plugin.mockup.GenesisMockupPlugin'
+  		}
+	}
+}
+
+publishing{
+
+	publications {
+    maven(MavenPublication) {
+    	groupId = 'jp.co.ultimark.genesis'
+    	artifactId = 'genesis-dev-support'
+    	version = '1.0.0'
+    	
+    	from components.java
+    }
+  }
+	
+	repositories {
+		maven {
+			name = 'internal'
+			url = uri('http://localhost:8081/repository/maven-releases/')
+			allowInsecureProtocol = true
+			credentials {
+				username 'admin'
+				password '4EwjMbQrei6U'
+			}
 		}
 	}
 }
